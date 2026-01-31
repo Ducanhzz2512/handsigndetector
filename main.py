@@ -1,4 +1,5 @@
 import pickle
+import pyautogui
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -22,7 +23,7 @@ labels_dict = {i: chr(65 + i) for i in range(26)}
 # ===== TEXT CONTROL =====
 last_letter = ""
 letter_start_time = 0
-LETTER_DELAY = 1.0  # giữ 1 giây mới gõ
+LETTER_DELAY = 2.0  # giữ 1 giây mới gõ
 
 # ===== MAIN LOOP =====
 while True:
@@ -35,7 +36,7 @@ while True:
     if not ret:
         continue
 
-    frame = cv2.flip(frame, 1)
+  
     H, W, _ = frame.shape
 
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
