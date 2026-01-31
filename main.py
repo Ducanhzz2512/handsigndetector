@@ -73,18 +73,24 @@ while True:
         prev_x, prev_y = curr_x, curr_y
 
         # ===== SCROLL MODE =====
+
         if distance(index_finger, middle_finger) < 0.04:
 
-            curr_scroll_y = index_finger.y
+            curr_y = index_finger.y
 
             if last_scroll_y is not None:
-                dy = curr_scroll_y - last_scroll_y
-                pyautogui.scroll(int(-dy * SCROLL_SENSITIVITY * 100))
 
-            last_scroll_y = curr_scroll_y
+                dy = curr_y - last_scroll_y
+
+                # ngưỡng chống rung
+                if abs(dy) > 0.01:
+                    pyautogui.scroll(int(-dy * 3000))
+
+            last_scroll_y = curr_y
 
         else:
             last_scroll_y = None
+
 
         # ===== DRAW LANDMARKS =====
         mp_drawing.draw_landmarks(
